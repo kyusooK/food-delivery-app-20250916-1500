@@ -1,0 +1,65 @@
+<template>
+
+    <v-card outlined>
+        <v-card-title>
+            PickupFood
+        </v-card-title>
+
+        <v-card-text>
+            <Number label="OrderId" v-model="value.orderId" :editMode="editMode"/>
+            <Number label="DeliveryPersonId" v-model="value.deliveryPersonId" :editMode="editMode"/>
+        </v-card-text>
+
+        <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                    color="deep-purple lighten-2"
+                    text
+                    @click="pickupFood"
+            >
+                PickupFood
+            </v-btn>
+            
+            <v-btn
+                    color="deep-purple lighten-2"
+                    text
+                    @click="close"
+            >
+                Close
+            </v-btn>
+        </v-card-actions>
+    </v-card>
+
+</template>
+
+<script>
+
+export default {
+    name: 'PickupFoodCommand',
+    components:{
+    },
+    props: {},
+    data: () => ({
+        editMode: true,
+        value: {},
+    }),
+    created() {
+        this.value.orderId = 0;
+        this.value.deliveryPersonId = 0;
+    },
+    watch: {
+    },
+    methods: {
+        pickupFood() {
+            this.$emit('pickupFood', this.value);
+        },
+        close() {
+            this.$emit('closeDialog');
+        },
+        change() {
+            this.$emit("update:modelValue", this.value);
+        },
+    }
+}
+</script>
+
